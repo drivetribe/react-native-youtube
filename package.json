@@ -25,5 +25,8 @@
     "android": {
       "packageInstance": "new ReactNativeYouTube()"
     }
-  }
+  },
+  "devDependencies": {
+		"react-native": "0.41.2"
+	}
 }
