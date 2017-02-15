@@ -134,29 +134,35 @@ export default class YouTube extends Component {
       };
     }
 
-    return <RCTYouTube
-      ref={component => { this._root = component; }}
-      onReady={this._onReady}
-      {...nativeProps}
-      // These override and delegate to the this.props functions
-      onYoutubeVideoReady={this._onReady}
-      onYoutubeVideoChangeState={this._onChangeState}
-      onYoutubeVideoChangeQuality={this._onChangeQuality}
-      onYoutubeVideoError={this._onError}
-      onYoutubeVideoProgress={this._onProgress}
-      />;
+    return (
+      <RCTYouTube
+        ref={component => { this._root = component; }}
+        onReady={this._onReady}
+        {...nativeProps}
+        // These override and delegate to the this.props functions
+        onYoutubeVideoReady={this._onReady}
+        onYoutubeVideoChangeState={this._onChangeState}
+        onYoutubeVideoChangeQuality={this._onChangeQuality}
+        onYoutubeVideoError={this._onError}
+        onYoutubeVideoProgress={this._onProgress}
+      />
+    );
   }
 }
 
-const RCTYouTube = requireNativeComponent('ReactYouTube', YouTube,
-{
-  nativeOnly: {onYoutubeVideoError:true,
-              onYoutubeVideoReady:true,
-              onYoutubeVideoChangeState:true,
-              onYoutubeVideoChangeQuality:true,
-              onYoutubeVideoProgress:true,
-              }
-});
+const RCTYouTube = requireNativeComponent(
+  'ReactYouTube',
+  YouTube,
+  {
+    nativeOnly: {
+      onYoutubeVideoError:true,
+      onYoutubeVideoReady:true,
+      onYoutubeVideoChangeState:true,
+      onYoutubeVideoChangeQuality:true,
+      onYoutubeVideoProgress:true,
+    },
+  }
+);
 
 const styles = StyleSheet.create({
   base: {

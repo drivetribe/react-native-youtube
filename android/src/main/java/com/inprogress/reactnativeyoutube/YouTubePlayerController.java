@@ -1,13 +1,11 @@
 package com.inprogress.reactnativeyoutube;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-
 
 public class YouTubePlayerController implements
         YouTubePlayer.OnInitializedListener, YouTubePlayer.PlayerStateChangeListener, YouTubePlayer.PlaybackEventListener, YouTubePlayer.OnFullscreenListener {
@@ -57,8 +55,7 @@ public class YouTubePlayerController implements
                     if (!isPlayInline()) {
                         mYouTubePlayer.setFullscreen(true);
                     }
-                }
-                else {
+                } else {
                     mYouTubePlayer.cueVideo(videoId);
                 }
             }
@@ -103,9 +100,9 @@ public class YouTubePlayerController implements
         ProgressBar progressBar;
         try {
             // As of 2016-02-16, the ProgressBar is at position 0 -> 3 -> 2 in the view tree of the Youtube Player Fragment
-            ViewGroup child1 = (ViewGroup)mYouTubeView.getChildAt(0);
-            ViewGroup child2 = (ViewGroup)child1.getChildAt(3);
-            progressBar = (ProgressBar)child2.getChildAt(2);
+            ViewGroup child1 = (ViewGroup) mYouTubeView.getChildAt(0);
+            ViewGroup child2 = (ViewGroup) child1.getChildAt(3);
+            progressBar = (ProgressBar) child2.getChildAt(2);
         } catch (Throwable t) {
             // As its position may change, we fallback to looking for it
             progressBar = findProgressBar(mYouTubeView);
@@ -119,9 +116,9 @@ public class YouTubePlayerController implements
 
     private ProgressBar findProgressBar(View view) {
         if (view instanceof ProgressBar) {
-            return (ProgressBar)view;
+            return (ProgressBar) view;
         } else if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup)view;
+            ViewGroup viewGroup = (ViewGroup) view;
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 ProgressBar res = findProgressBar(viewGroup.getChildAt(i));
                 if (res != null) return res;
@@ -161,8 +158,7 @@ public class YouTubePlayerController implements
         if (isLoop()) {
             mYouTubePlayer.loadVideo(videoId);
             mYouTubePlayer.play();
-        }
-        else {
+        } else {
             mYouTubePlayer.setFullscreen(false);
         }
     }
@@ -225,12 +221,10 @@ public class YouTubePlayerController implements
         if (isLoaded()) {
             if (videoId == null) {
                 mYouTubePlayer.pause();
-            }
-            else if (isPlay()) {
+            } else if (isPlay()) {
                 mYouTubePlayer.loadVideo(videoId);
                 mYouTubePlayer.play();
-            }
-            else {
+            } else {
                 mYouTubePlayer.cueVideo(videoId);
             }
         }
@@ -245,8 +239,7 @@ public class YouTubePlayerController implements
                 if (!isPlayInline()) {
                     mYouTubePlayer.setFullscreen(true);
                 }
-            }
-            else if (!this.play && mYouTubePlayer.isPlaying()){
+            } else if (!this.play && mYouTubePlayer.isPlaying()) {
                 mYouTubePlayer.pause();
                 mYouTubePlayer.setFullscreen(false);
             }
