@@ -11,24 +11,21 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 
 import java.util.Map;
 
+class YouTubeManager extends ViewGroupManager<YouTubeView> {
 
-public class YouTubeManager extends ViewGroupManager<YouTubeView> {
+    private static final String REACT_CLASS = "ReactYouTube";
 
-    public static final String REACT_CLASS = "ReactYouTube";
-
-    public YouTubeView mYouTubeView;
-
-    public static final String PROP_VIDEO_ID = "videoId";
-    public static final String PROP_API_KEY = "apiKey";
-    public static final String PROP_INLINE = "playsInline";
-    public static final String PROP_SHOW_INFO = "showinfo";
-    public static final String PROP_MODESTBRANDING = "modestbranding";
-    public static final String PROP_CONTROLS = "controls";
-    public static final String PROP_PLAY = "play";
-    public static final String PROP_HIDDEN = "hidden";
-    public static final String PROP_REL = "rel";
-    public static final String PROP_LOOP = "loop";
-    public static final String PROP_FULLSCREEN = "fs";
+    private static final String PROP_VIDEO_ID = "videoId";
+    private static final String PROP_API_KEY = "apiKey";
+    private static final String PROP_INLINE = "playsInline";
+    private static final String PROP_SHOW_INFO = "showinfo";
+    private static final String PROP_MODESTBRANDING = "modestbranding";
+    private static final String PROP_CONTROLS = "controls";
+    private static final String PROP_PLAY = "play";
+    private static final String PROP_HIDDEN = "hidden";
+    private static final String PROP_REL = "rel";
+    private static final String PROP_LOOP = "loop";
+    private static final String PROP_FULLSCREEN = "fs";
 
     @Override
     public String getName() {
@@ -37,14 +34,15 @@ public class YouTubeManager extends ViewGroupManager<YouTubeView> {
 
     @Override
     protected YouTubeView createViewInstance(ThemedReactContext themedReactContext) {
-        mYouTubeView = new YouTubeView(themedReactContext);
-        return mYouTubeView;
+        return new YouTubeView(themedReactContext);
+    }
+
+    @Override public void onDropViewInstance(YouTubeView view) {
+        view.cleanupResources();
     }
 
     @Override
-    public
-    @Nullable
-    Map getExportedCustomDirectEventTypeConstants() {
+    public @Nullable Map getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.of(
                 "error",
                 MapBuilder.of("registrationName", "onYoutubeVideoError"),
@@ -55,11 +53,6 @@ public class YouTubeManager extends ViewGroupManager<YouTubeView> {
                 "quality",
                 MapBuilder.of("registrationName", "onYoutubeVideoChangeQuality")
         );
-    }
-
-    @ReactMethod
-    public void seekTo(Integer seconds) {
-        mYouTubeView.seekTo(seconds);
     }
 
     @ReactProp(name = PROP_VIDEO_ID)

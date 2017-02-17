@@ -15,7 +15,7 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 @SuppressLint("ViewConstructor")
 public class YouTubeView extends FrameLayout {
 
-    YouTubePlayerController mYoutubeController;
+    private YouTubePlayerController mYoutubeController;
     private YouTubePlayerFragment mYouTubePlayerFragment;
 
     public YouTubeView(ReactContext context) {
@@ -45,13 +45,7 @@ public class YouTubeView extends FrameLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        Activity currentActivity = getReactContext().getCurrentActivity();
-        if (currentActivity != null) {
-            FragmentManager fragmentManager = currentActivity.getFragmentManager();
-            if (mYouTubePlayerFragment != null) {
-                fragmentManager.beginTransaction().remove(mYouTubePlayerFragment).commit();
-            }
-        }
+        cleanupResources();
         super.onDetachedFromWindow();
     }
 
@@ -163,4 +157,14 @@ public class YouTubeView extends FrameLayout {
             layout(getLeft(), getTop(), getRight(), getBottom());
         }
     };
+
+    public void cleanupResources() {
+        Activity currentActivity = getReactContext().getCurrentActivity();
+        if (currentActivity != null) {
+            FragmentManager fragmentManager = currentActivity.getFragmentManager();
+            if (mYouTubePlayerFragment != null) {
+                fragmentManager.beginTransaction().remove(mYouTubePlayerFragment).commit();
+            }
+        }
+    }
 }
