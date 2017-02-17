@@ -60,28 +60,29 @@ export default class YouTube extends Component {
   }
 
   _onReady(event) {
-    return this.props.onReady && this.props.onReady(event.nativeEvent);
+    this.props.onReady && this.props.onReady(event.nativeEvent);
   }
 
   _onChangeState(event) {
     if(event.nativeEvent.state == 'ended' && this.props.loop) {
       this.seekTo(0);
     }
-    return this.props.onChangeState && this.props.onChangeState(event.nativeEvent);
+    this.props.onChangeState && this.props.onChangeState(event.nativeEvent);
   }
 
   _onChangeQuality(event) {
-    return this.props.onChangeQuality && this.props.onChangeQuality(event.nativeEvent);
+    this.props.onChangeQuality && this.props.onChangeQuality(event.nativeEvent);
   }
 
   _onError(event) {
-    return this.props.onError && this.props.onError(event.nativeEvent);
+    this.props.onError && this.props.onError(event.nativeEvent);
   }
   _onProgress(event){
-    return this.props.onProgress && this.props.onProgress(event.nativeEvent);
+    this.props.onProgress && this.props.onProgress(event.nativeEvent);
   }
   seekTo(seconds){
-    this.refs.youtubePlayer.seekTo(parseInt(seconds, 10));
+    // TODO: implement this without making the view a singleton
+    // this.refs.youtubePlayer.seekTo(parseInt(seconds, 10));
   }
 
   render() {
