@@ -7,11 +7,11 @@
 
 import React, { Component, PropTypes } from 'react';
 import {
-  View,
-  StyleSheet,
-  requireNativeComponent,
+  NativeMethodsMixin,
   NativeModules,
-  NativeMethodsMixin
+  requireNativeComponent,
+  StyleSheet,
+  View,
 } from 'react-native';
 
 export default class YouTube extends Component {

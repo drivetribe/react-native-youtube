@@ -5,14 +5,14 @@ import android.util.Log;
 
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.common.MapBuilder;
-import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
 import java.util.Map;
 
 
-public class YouTubeManager extends SimpleViewManager<YouTubeView> {
+public class YouTubeManager extends ViewGroupManager<YouTubeView> {
 
     public static final String REACT_CLASS = "ReactYouTube";
 
@@ -79,7 +79,7 @@ public class YouTubeManager extends SimpleViewManager<YouTubeView> {
     @ReactProp(name = PROP_PLAY)
     public void setPropPlay(
             YouTubeView view, @Nullable Boolean param) {
-        Log.e(PROP_PLAY,""+param);
+        Log.e(PROP_PLAY, "" + param);
         view.setPlay(param);
     }
 
@@ -108,7 +108,7 @@ public class YouTubeManager extends SimpleViewManager<YouTubeView> {
     public void setPropModestbranding(
             YouTubeView view, @Nullable Boolean param) {
         //Log.e(PROP_MODESTBRANDING,""+param);
-        view.setModestbranding(param);
+        view.setModestBranding(param);
     }
 
     @ReactProp(name = PROP_LOOP)

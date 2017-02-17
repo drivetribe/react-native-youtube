@@ -61,7 +61,6 @@ public class YouTubeView extends FrameLayout {
 
 
     public void playerViewDidBecomeReady() {
-        post(measureAndLayout);
         WritableMap event = Arguments.createMap();
         ReactContext reactContext = (ReactContext) getContext();
         event.putInt("target", getId());
@@ -70,6 +69,7 @@ public class YouTubeView extends FrameLayout {
 
 
     public void didChangeToState(String param) {
+        post(measureAndLayout);
         WritableMap event = Arguments.createMap();
         event.putString("state", param);
         event.putInt("target", getId());
@@ -118,7 +118,7 @@ public class YouTubeView extends FrameLayout {
         mYoutubeController.setShowInfo(bool);
     }
 
-    public void setModestbranding(Boolean bool) {
+    public void setModestBranding(Boolean bool) {
         mYoutubeController.setModestBranding(bool);
     }
 
