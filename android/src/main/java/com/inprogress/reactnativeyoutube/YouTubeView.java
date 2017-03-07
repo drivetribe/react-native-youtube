@@ -71,7 +71,9 @@ public class YouTubeView extends FrameLayout {
 
 
     public void didChangeToState(String param) {
-        post(measureAndLayout);
+        if ("videoStarted".equals(param)) {
+            post(measureAndLayout);
+        }
         WritableMap event = Arguments.createMap();
         event.putString("state", param);
         event.putInt("target", getId());

@@ -8,14 +8,17 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 
 public class YouTubePlayerController implements
-        YouTubePlayer.OnInitializedListener, YouTubePlayer.PlayerStateChangeListener, YouTubePlayer.PlaybackEventListener, YouTubePlayer.OnFullscreenListener {
+        YouTubePlayer.OnInitializedListener,
+        YouTubePlayer.PlayerStateChangeListener,
+        YouTubePlayer.PlaybackEventListener,
+        YouTubePlayer.OnFullscreenListener {
 
-    String videoId = null;
+    private YouTubePlayer mYouTubePlayer;
 
-    YouTubePlayer mYouTubePlayer;
-    YouTubeView mYouTubeView;
-
+    private YouTubeView mYouTubeView;
     private boolean isLoaded = false;
+
+    private String videoId = null;
     private boolean play = false;
     private boolean hidden = false;
     private boolean related = false;
@@ -27,7 +30,7 @@ public class YouTubePlayerController implements
     private boolean fullscreen = true;
 
 
-    public YouTubePlayerController(YouTubeView youTubeView) {
+    YouTubePlayerController(YouTubeView youTubeView) {
         this.mYouTubeView = youTubeView;
     }
 
@@ -35,7 +38,7 @@ public class YouTubePlayerController implements
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
         if (!wasRestored) {
 
-            // Intall listeners on the youtube player
+            // Install listeners on the youtube player
             mYouTubePlayer = youTubePlayer;
             mYouTubePlayer.setPlayerStateChangeListener(this);
             mYouTubePlayer.setPlaybackEventListener(this);
