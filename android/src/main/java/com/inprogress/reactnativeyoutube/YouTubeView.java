@@ -17,6 +17,7 @@ public class YouTubeView extends FrameLayout {
 
     private YouTubePlayerController mYoutubeController;
     private YouTubePlayerFragment mYouTubePlayerFragment;
+    private String apiKey;
 
     public YouTubeView(ReactContext context) {
         super(context);
@@ -36,10 +37,17 @@ public class YouTubeView extends FrameLayout {
 
     @Override
     protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         Activity currentActivity = getReactContext().getCurrentActivity();
         if (currentActivity != null) {
             FragmentManager fragmentManager = getReactContext().getCurrentActivity().getFragmentManager();
-            fragmentManager.beginTransaction().add(getId(), mYouTubePlayerFragment).commit();
+            if (fragmentManager.findFragmentById(getId()) == null) {
+                if (mYouTubePlayerFragment == null) {
+                    mYouTubePlayerFragment = YouTubePlayerFragment.newInstance();
+                    mYouTubePlayerFragment.initialize(apiKey, mYoutubeController);
+                }
+                fragmentManager.beginTransaction().add(getId(), mYouTubePlayerFragment).commit();
+            }
         }
     }
 
@@ -130,6 +138,7 @@ public class YouTubeView extends FrameLayout {
 
     public void setApiKey(String apiKey) {
         try {
+            this.apiKey = apiKey;
             mYouTubePlayerFragment.initialize(apiKey, mYoutubeController);
         } catch (Exception e) {
             receivedError(e.getMessage());
@@ -164,6 +173,7 @@ public class YouTubeView extends FrameLayout {
             FragmentManager fragmentManager = currentActivity.getFragmentManager();
             if (mYouTubePlayerFragment != null) {
                 fragmentManager.beginTransaction().remove(mYouTubePlayerFragment).commit();
+                mYouTubePlayerFragment = null;
             }
         }
     }
